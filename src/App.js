@@ -1,40 +1,26 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import FlagMain from './components/FlagsMain';
+import DetailFlag from './components/DetailFlag';
+import { ResponseProvider } from './components/context/ResponseContext';
 import './App.scss';
 
 function App() {
-  const [flagsData, setFlagsData] = useState([]);
-
-  useEffect(() => {
-    getApi()
-  }, []);
-
-  const getApi = async () => {
-    const res = await fetch('https://restcountries.eu/rest/v2/all');
-    const data = await res.json();
-    setFlagsData(data);
-  }
-
   return (
-    <div className="container">
-      <h1>Hello, home!</h1>
-
-      <div className="flag-wrapper">
-        {flagsData.map(flag => (
-          <div key={flag.name} className="flag-card">
-            <div className="flag-container">
-              <img src={flag.flag} alt={flag.name + '\'s flag'} />
-            </div>
-            <div className="card-body">
-              <h4>{flag.name}</h4>
-              <p>Population: {flag.population}</p>
-              <p>Region: {flag.region}</p>
-              <p>Capital: {flag.capital}</p>
-            </div>
-          </div>
-        ))}
+    <ResponseProvider>
+      <nav>
+        <h2>Where in the world?</h2>
+        <button className='theme-switcher'>Dark Mode</button>
+      </nav>
+      <div className="container">
+        <Router>
+          <Switch>
+            <Route path='/' exact component={FlagMain} />
+            <Route path='/detail/:nationFlag' component={DetailFlag} />
+          </Switch>
+        </Router>
       </div>
-
-    </div>
+    </ResponseProvider>
   );
 }
 
