@@ -40,7 +40,7 @@ nav {
     background: $White;
     border: none;
     font-size: 1rem;
-    font-weight: 600;
+    font-weight: 800;
   }
 }
 
@@ -96,13 +96,27 @@ nav {
         position: absolute;
         top: 54px;
         width: inherit;
-        padding: 15px 20px;
         background: $White;
         cursor: pointer;
         border-radius: inherit;
 
         .option {
-          margin-bottom: 7px;
+          height: 25px;
+          padding: 15px 20px;
+          display: flex;
+          align-items: center;
+
+          &:first-child {
+            margin-top: 10px;
+          }
+
+          &:last-child {
+            margin-bottom: 10px;
+          }
+
+          &:hover {
+            background: #cecece;
+          }
         }
       }
     }

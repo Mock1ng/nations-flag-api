@@ -4,25 +4,50 @@ import { ResponseContext } from './context/ResponseContext';
 const Form = () => {
     const { setFlagsData } = useContext(ResponseContext)
     const [search, setSearch] = useState('');
+    const [finishSearch, setFinishSearch] = useState('');
     const [selectedOptions, setSelectedOptions] = useState('Filter by Region');
     const [isDisplay, setIsDisplay] = useState(false);
 
     const searchHandler = e => setSearch(e.target.value);
 
     useEffect(() => {
-        console.log(selectedOptions);
-        getOneFlag();
-    }, [selectedOptions])
+        setFinishSearch(search)
+    }, [search])
 
     const getOneFlag = async () => {
-        const res = await fetch(`https://restcountries.eu/rest/v2/name/${search}`);
+        let url;
+        if (finishSearch.length > 0) {
+            url = fetch(`https://restcountries.eu/rest/v2/name/${finishSearch}`)
+        } else {
+            url = fetch('https://restcountries.eu/rest/v2/all');
+        }
+
+        try {
+            const res = await url;
+            const data = await res.json();
+            setFlagsData(data)
+        } catch (error) {
+            console.error(error);
+        }
+    }
+
+    const getRegion = async (selected) => {
+        let url;
+        setSelectedOptions(selected)
+        if (selected === 'all') {
+            url = fetch('https://restcountries.eu/rest/v2/all');
+        } else {
+            url = fetch(`https://restcountries.eu/rest/v2/region/${selected}`)
+        }
+        const res = await url
         const data = await res.json();
-        setFlagsData(data)
+        setFlagsData(data);
     }
 
     const submit = e => {
         e.preventDefault();
-
+        getOneFlag();
+        setSearch('');
     }
 
     return (
@@ -34,14 +59,15 @@ const Form = () => {
 
                 <div className="select-clone" onClick={() => setIsDisplay(!isDisplay)}>
                     <div className="option-bar">
-                        <p className="selected">{selectedOptions}</p>
+                        {selectedOptions === 'Filter by Region' ? (<p className="selected">{selectedOptions}</p>) : (<p className="selected">Region: {selectedOptions}</p>)}
                     </div>
                     <div className="dropdown-options" style={isDisplay ? { display: 'block' } : { display: 'none' }}>
-                        <div className="option" onClick={() => setSelectedOptions('africa')}>Africa</div>
-                        <div className="option" onClick={() => setSelectedOptions('america')}>America</div>
-                        <div className="option" onClick={() => setSelectedOptions('asia')}>Asia</div>
-                        <div className="option" onClick={() => setSelectedOptions('europe')}>Europe</div>
-                        <div className="option" onClick={() => setSelectedOptions('oceania')}>Oceania</div>
+                        <div className="option" onClick={() => getRegion('all')}>All</div>
+                        <div className="option" onClick={() => getRegion('africa')}>Africa</div>
+                        <div className="option" onClick={() => getRegion('america')}>America</div>
+                        <div className="option" onClick={() => getRegion('asia')}>Asia</div>
+                        <div className="option" onClick={() => getRegion('europe')}>Europe</div>
+                        <div className="option" onClick={() => getRegion('oceania')}>Oceania</div>
                     </div>
                 </div>
             </div>
