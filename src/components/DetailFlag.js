@@ -40,23 +40,23 @@ const DetailFlag = ({ match }) => {
 
     return (
         <div>
-            <NavLink to='/'><button>Back</button></NavLink>
+            <NavLink to='/'><button className='back-btn'>Back</button></NavLink>
             <div className="detail-flag">
                 <img src={flagData.flag} alt={flagData.name + '\' flag'} />
                 <div className="flag-attributes">
                     <h2 className='flag-name'>{flagData.name}</h2>
                     <div className="attributes">
-                        <p className="attribute">Native Name: {flagData.nativeName}</p>
-                        <p className="attribute">Population: {flagData.population}</p>
-                        <p className="attribute">Region: {flagData.region}</p>
-                        <p className="attribute">Sub Region: {flagData.subregion}</p>
-                        <p className="attribute">Capital: {flagData.capital}</p>
-                        <p className="attribute">Top Level Domain: {flagData.topLevelDomain}</p>
-                        <p className="attribute">Currencies: {currency}</p>
+                        <p className="attribute">Native Name: <span>{flagData.nativeName}</span></p>
+                        <p className="attribute">Population: <span>{flagData.population}</span></p>
+                        <p className="attribute">Region: <span>{flagData.region}</span></p>
+                        <p className="attribute">Sub Region: <span>{flagData.subregion}</span></p>
+                        <p className="attribute">Capital: <span>{flagData.capital}</span></p>
+                        <p className="attribute">Top Level Domain: <span>{flagData.topLevelDomain}</span></p>
+                        <p className="attribute">Currencies: <span>{currency}</span></p>
                         <p className="attribute">Languages: {languages.map(lang => (<span key={lang.name}>{lang.name}, </span>))}</p>
                     </div>
                     <p className="borders">Border Countries: {borderCountries.map(border => (
-                        <a href={'/detail/' + border.name} key={border.name}>{border.name}, </a>
+                        <a href={'/detail/' + border.name} key={border.name}>{border.name}</a>
                     ))}</p>
                 </div>
             </div>

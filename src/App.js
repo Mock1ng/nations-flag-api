@@ -9,7 +9,7 @@ function App() {
   return (
     <ResponseProvider>
       <nav>
-        <h2><a href="/">Where in the world?</a></h2>
+        <h2><a href="/" className='title'>Where in the world?</a></h2>
         <button className='theme-switcher'>Dark Mode</button>
       </nav>
       <div className="container">

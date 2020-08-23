@@ -12,10 +12,14 @@ body {
   background: $VeryLightGray;
 }
 
+.title {
+  text-decoration: none;
+}
+
 nav {
   height: 10vh;
   box-shadow: 2px 4px 5px #ebebeb;
-  margin-bottom: 50px;
+  margin-bottom: 70px;
   padding: 0 5%;
   position: relative;
   width: 100%;
@@ -173,6 +177,87 @@ nav {
           span {
             font-weight: 300;
           }
+        }
+      }
+    }
+  }
+
+  .back-btn {
+    background: $White;
+    border: none;
+    width: 120px;
+    height: 35px;
+    box-shadow: 0 0 3px 3px rgb(228, 228, 228);
+    border-radius: 6px;
+    margin-bottom: 70px;
+    transition: 0.2s;
+
+    &:hover {
+      cursor: pointer;
+      transform: translateY(-3px);
+      box-shadow: 1px 2px 5px 3px rgb(228, 228, 228);
+    }
+
+    &:focus {
+      outline: none;
+    }
+  }
+
+  .detail-flag {
+    display: flex;
+    justify-content: space-between;
+
+    img {
+      width: 550px;
+      height: 345px;
+    }
+
+    .flag-attributes {
+      width: 48%;
+      height: 345px;
+      padding: 30px 0;
+      position: relative;
+
+      .flag-name {
+        margin-bottom: 20px;
+        font-size: 1.9rem;
+      }
+
+      .attributes {
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        height: 150px;
+
+        .attribute {
+          font-weight: 600;
+          margin-bottom: 10px;
+          font-size: 0.9rem;
+
+          span {
+            font-weight: 300;
+          }
+        }
+      }
+
+      .borders {
+        position: absolute;
+        bottom: 30px;
+        font-weight: 600;
+        font-size: 0.9rem;
+
+        a {
+          font-weight: 300;
+          text-decoration: none;
+          display: inline-block;
+          align-items: center;
+          height: 25px;
+          background: $White;
+          margin-right: 10px;
+          margin-bottom: 10px;
+          padding: 2px 10px;
+          box-shadow: 0 0 1px 2px #f0f0f0;
+          border-radius: 3px;
         }
       }
     }
