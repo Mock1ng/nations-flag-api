@@ -2,7 +2,8 @@ import React, { useState, useEffect, useContext } from 'react';
 import { ResponseContext } from './context/ResponseContext';
 
 const Form = () => {
-    const { setFlagsData } = useContext(ResponseContext)
+    const { setFlagsData } = useContext(ResponseContext);
+    const { setIsError } = useContext(ResponseContext);
     const [search, setSearch] = useState('');
     const [finishSearch, setFinishSearch] = useState('');
     const [selectedOptions, setSelectedOptions] = useState('Filter by Region');
@@ -27,7 +28,7 @@ const Form = () => {
             const data = await res.json();
             setFlagsData(data)
         } catch (error) {
-            console.error(error);
+            setIsError(true);
         }
     }
 
@@ -39,9 +40,13 @@ const Form = () => {
         } else {
             url = fetch(`https://restcountries.eu/rest/v2/region/${selected}`)
         }
-        const res = await url
-        const data = await res.json();
-        setFlagsData(data);
+        try {
+            const res = await url
+            const data = await res.json();
+            setFlagsData(data);
+        } catch (error) {
+            console.error(error);
+        }
     }
 
     const submit = e => {
