@@ -17,7 +17,7 @@ body {
 }
 
 nav {
-  height: 10vh;
+  height: 70px;
   box-shadow: 2px 4px 5px #ebebeb;
   margin-bottom: 70px;
   padding: 0 5%;
@@ -53,20 +53,34 @@ nav {
   padding: 0 5%;
 
   .search-bar-form {
-    margin-bottom: 50px;
+    margin-bottom: 70px;
     position: relative;
 
     form {
 
-      .search-bar {
-        width: 400px;
-        height: 50px;
-        border: none;
-        padding: 10px 15px;
+      .search-container {
         border-radius: 5px;
         box-shadow: 0 0 10px 2px #ebebeb;
-        background: $White;
-        font-weight: 600;
+        width: max-content;
+        padding: 0px 20px;
+
+        .fa-search {
+          margin-right: 20px;
+          color: $DarkGray;
+        }
+
+        .search-bar {
+          width: 400px;
+          height: 50px;
+          border: none;
+          background: $White;
+          font-weight: 600;
+          color: $DarkGray;
+
+          &:focus {
+            outline: none;
+          }
+        }
       }
     }
 
@@ -91,6 +105,9 @@ nav {
         background: $White;
         box-shadow: 0 0 10px 2px #ebebeb;
         cursor: pointer;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
 
         .selected {
           text-transform: capitalize;
@@ -128,10 +145,15 @@ nav {
   }
 
   .flag-wrapper {
-    display: flex;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, 250px);
+    grid-auto-rows: auto;
     justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
+    gap: 50px;
+    // display: flex;
+    // justify-content: space-between;
+    // align-items: center;
+    // flex-wrap: wrap;
 
     .flag-card {
       position: relative;
@@ -191,6 +213,7 @@ nav {
     border-radius: 6px;
     margin-bottom: 70px;
     transition: 0.2s;
+    font-size: 1rem;
 
     &:hover {
       cursor: pointer;
@@ -200,6 +223,10 @@ nav {
 
     &:focus {
       outline: none;
+    }
+
+    .fa-long-arrow-alt-left {
+      margin-right: 10px;
     }
   }
 

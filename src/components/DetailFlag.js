@@ -40,7 +40,7 @@ const DetailFlag = ({ match }) => {
 
     return (
         <div>
-            <NavLink to='/'><button className='back-btn'>Back</button></NavLink>
+            <NavLink to='/'><button className='back-btn'><i className="fas fa-long-arrow-alt-left"></i>Back</button></NavLink>
             <div className="detail-flag">
                 <img src={flagData.flag} alt={flagData.name + '\' flag'} />
                 <div className="flag-attributes">

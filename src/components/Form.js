@@ -59,12 +59,16 @@ const Form = () => {
         <div>
             <div className="search-bar-form">
                 <form onSubmit={submit}>
-                    <input type="text" name='search' className='search-bar' autoComplete='off' placeholder='Search for a country...' onChange={searchHandler} value={search} />
+                    <div className="search-container">
+                        <i className="fas fa-search"></i>
+                        <input type="text" name='search' className='search-bar' autoComplete='off' placeholder='Search for a country...' onChange={searchHandler} value={search} />
+                    </div>
                 </form>
 
                 <div className="select-clone" onClick={() => setIsDisplay(!isDisplay)}>
                     <div className="option-bar">
                         {selectedOptions === 'Filter by Region' ? (<p className="selected">{selectedOptions}</p>) : (<p className="selected">Region: {selectedOptions}</p>)}
+                        <i className="fas fa-angle-down"></i>
                     </div>
                     <div className="dropdown-options" style={isDisplay ? { display: 'block' } : { display: 'none' }}>
                         <div className="option" onClick={() => getRegion('all')}>All</div>

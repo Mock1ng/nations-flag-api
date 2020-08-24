@@ -10,7 +10,7 @@ function App() {
     <ResponseProvider>
       <nav>
         <h2><a href="/" className='title'>Where in the world?</a></h2>
-        <button className='theme-switcher'>Dark Mode</button>
+        <button className='theme-switcher'><i className="far fa-moon"></i>  Dark Mode</button>
       </nav>
       <div className="container">
         <Router>
