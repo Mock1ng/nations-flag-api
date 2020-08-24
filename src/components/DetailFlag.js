@@ -46,14 +46,18 @@ const DetailFlag = ({ match }) => {
                 <div className="flag-attributes">
                     <h2 className='flag-name'>{flagData.name}</h2>
                     <div className="attributes">
-                        <p className="attribute">Native Name: <span>{flagData.nativeName}</span></p>
-                        <p className="attribute">Population: <span>{flagData.population}</span></p>
-                        <p className="attribute">Region: <span>{flagData.region}</span></p>
-                        <p className="attribute">Sub Region: <span>{flagData.subregion}</span></p>
-                        <p className="attribute">Capital: <span>{flagData.capital}</span></p>
-                        <p className="attribute">Top Level Domain: <span>{flagData.topLevelDomain}</span></p>
-                        <p className="attribute">Currencies: <span>{currency}</span></p>
-                        <p className="attribute">Languages: {languages.map(lang => (<span key={lang.name}>{lang.name}, </span>))}</p>
+                        <div className="first-column-attrs">
+                            <p className="attribute">Native Name: <span>{flagData.nativeName}</span></p>
+                            <p className="attribute">Population: <span>{flagData.population}</span></p>
+                            <p className="attribute">Region: <span>{flagData.region}</span></p>
+                            <p className="attribute">Sub Region: <span>{flagData.subregion}</span></p>
+                            <p className="attribute">Capital: <span>{flagData.capital}</span></p>
+                        </div>
+                        <div className="second-column-attrs">
+                            <p className="attribute">Top Level Domain: <span>{flagData.topLevelDomain}</span></p>
+                            <p className="attribute">Currencies: <span>{currency}</span></p>
+                            <p className="attribute">Languages: {languages.map(lang => (<span key={lang.name}>{lang.name}, </span>))}</p>
+                        </div>
                     </div>
                     <p className="borders">Border Countries: {borderCountries.map(border => (
                         <a href={'/detail/' + border.name} key={border.name}>{border.name}</a>
