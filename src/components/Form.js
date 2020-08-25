@@ -1,24 +1,20 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useContext } from 'react';
 import { ResponseContext } from './context/ResponseContext';
 
 const Form = () => {
     const { setFlagsData } = useContext(ResponseContext);
     const { setIsError } = useContext(ResponseContext);
+    const { finishSearch, setFinishSearch } = useContext(ResponseContext);
+    const { selectedOptions, setSelectedOptions } = useContext(ResponseContext);
     const [search, setSearch] = useState('');
-    const [finishSearch, setFinishSearch] = useState('');
-    const [selectedOptions, setSelectedOptions] = useState('Filter by Region');
     const [isDisplay, setIsDisplay] = useState(false);
 
     const searchHandler = e => setSearch(e.target.value);
 
-    useEffect(() => {
-        setFinishSearch(search)
-    }, [search])
-
     const getOneFlag = async () => {
         let url;
-        if (finishSearch.length > 0) {
-            url = fetch(`https://restcountries.eu/rest/v2/name/${finishSearch}`)
+        if (search.length > 0) {
+            url = fetch(`https://restcountries.eu/rest/v2/name/${search}`)
         } else {
             url = fetch('https://restcountries.eu/rest/v2/all');
         }
@@ -34,12 +30,15 @@ const Form = () => {
 
     const getRegion = async (selected) => {
         let url;
-        setSelectedOptions(selected)
+        setSelectedOptions(selected);
+        setFinishSearch('');
+
         if (selected === 'all') {
             url = fetch('https://restcountries.eu/rest/v2/all');
         } else {
             url = fetch(`https://restcountries.eu/rest/v2/region/${selected}`)
         }
+
         try {
             const res = await url
             const data = await res.json();
@@ -51,8 +50,10 @@ const Form = () => {
 
     const submit = e => {
         e.preventDefault();
+        setFinishSearch(search);
         getOneFlag();
         setSearch('');
+        setSelectedOptions('Filter by Region');
     }
 
     return (
@@ -79,6 +80,8 @@ const Form = () => {
                         <div className="option" onClick={() => getRegion('oceania')}>Oceania</div>
                     </div>
                 </div>
+
+                {finishSearch.length > 0 ? (<div className="search-keyword">You search for: <span>{finishSearch}</span></div>) : ''}
             </div>
         </div>
     )

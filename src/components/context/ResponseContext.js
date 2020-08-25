@@ -5,9 +5,6 @@ export const ResponseContext = createContext();
 export const ResponseProvider = ({ children }) => {
     const [flagsData, setFlagsData] = useState([]);
 
-    useEffect(() => {
-        getApi()
-    }, []);
 
     const getApi = async () => {
         const res = await fetch('https://restcountries.eu/rest/v2/all');
@@ -15,9 +12,17 @@ export const ResponseProvider = ({ children }) => {
         setFlagsData(data);
     }
 
+    useEffect(() => {
+        getApi()
+    }, []);
+
+    const [finishSearch, setFinishSearch] = useState('');
+
+    const [selectedOptions, setSelectedOptions] = useState('Filter by Region');
+
     return (
         <div>
-            <ResponseContext.Provider value={{ flagsData, setFlagsData }}>
+            <ResponseContext.Provider value={{ flagsData, setFlagsData, finishSearch, setFinishSearch, selectedOptions, setSelectedOptions }}>
                 {children}
             </ResponseContext.Provider>
         </div>
